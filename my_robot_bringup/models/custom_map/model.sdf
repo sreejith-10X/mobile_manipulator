@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="custom_map">
+    <static>true</static>
+    <link name="map_link">
+      <!-- Rotate the entire link so the floor lies on the ground -->
+      <pose>0 0 0 1.5708 0 0</pose>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>meshes/collision.glb</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>meshes/visual.glb</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

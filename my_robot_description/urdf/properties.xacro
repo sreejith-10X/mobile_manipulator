@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot name="my_robot"
+        xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="red">
+        <material name="red">
+            <color rgba="1 0 0 1"/>
+        </material>
+    
+    </xacro:macro>
+
+    
+    <xacro:macro name="white">
+        <material name="white">
+            <color rgba="1 1 1 1"/>
+        </material>
+    </xacro:macro>
+
+
+
+    <xacro:macro name="inertial_box" params="m x y z o_xyz o_rpy" >
+        <inertial>
+            <origin xyz="${o_xyz}" rpy="${o_rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m*(1/12)*(y*y+z*z))}" ixy="0" ixz="0" iyy="${(m*(1/12)*(x*x+z*z))}" iyz="0" izz="${(m*(1/12)*(y*y+x*x))}"/>
+        </inertial>
+        
+    </xacro:macro>
+    <xacro:macro name="inertial_cylinder" params="m r l o_xyz o_rpy">
+        <inertial>
+            <origin xyz="${o_xyz}" rpy="${o_rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m*(1/12)*(3*r*r+l*l))}" ixy="0" ixz="0" iyy="${m*r*r/2}" iyz="0" izz="${(m*(1/12)*(3*r*r+l*l))}"/>
+        </inertial>
+     
+    </xacro:macro>
+    <xacro:macro name="caster_inertial" params="m r o_xyz o_rpy">
+        <inertial>
+            <origin xyz="${o_xyz}" rpy="${o_rpy}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${2*m*r*r/5}" ixy="0" ixz="0" iyy="${2*m*r*r/5}" iyz="0" izz="${2*m*r*r/5}"/>
+        </inertial>
+
+        
+    </xacro:macro>
+</robot>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<robot name="my_robot"
+        xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="arm_length" value=".06"/>
+    <xacro:property name="arm_width" value="0.05"/>
+    <xacro:property name="arm_height" value=".01" />
+    <xacro:property name="cyl_radius" value=".01" />
+    <xacro:property name="cyl_height" value=".2"/>
+
+    
+    <link name="arm_base">
+        <visual>
+            <geometry>
+                <box size="${arm_length} ${arm_width} ${arm_height}"/>
+             </geometry>
+             <origin xyz="0 0 0 " rpy="0 0 0"/>
+             <xacro:white/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${arm_length} ${arm_width} ${arm_height}"/>                
+            </geometry>
+             <origin xyz="0 0 0 " rpy="0 0 0"/>
+        </collision>
+        <xacro:inertial_box m="0.5" x="${arm_length}" y="${arm_width}" z="${arm_height}" o_xyz="0 0 ${arm_height / 2.0}" o_rpy="0 0 0 "/>
+
+
+    </link>  
+    
+    
+    <link name="arm_1">
+        <visual>
+            <geometry>
+                <cylinder radius="${cyl_radius}" length="${cyl_height}"/>
+            </geometry>
+            <origin xyz="0 0 0.1 " rpy="0 0 0 "/>
+            <xacro:white/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${cyl_radius}" length="${cyl_height}"/>
+            </geometry>
+            <origin xyz="0 0 0.1 " rpy="0 0 0 "/>
+        </collision>
+        <xacro:inertial_cylinder m=".03" r="${cyl_radius}" l="${cyl_height}" o_xyz="0 0 0" o_rpy="0 0 0 "/>
+
+    </link>
+        <link name="arm_2">
+        <visual>
+            <geometry>
+                <cylinder radius="${cyl_radius}" length="${cyl_height-.05}"/>
+            </geometry>
+            <origin xyz="0 0 .075 " rpy="0 0 0 "/>
+            <xacro:white/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${cyl_radius}" length="${cyl_height-.05}"/>
+            </geometry>
+            <origin xyz="0 0 .075 " rpy="0 0 0 "/>
+        </collision>
+        <xacro:inertial_cylinder m=".03" r="${cyl_radius}" l="${cyl_height-.05}" o_xyz="0 0 0" o_rpy="0 0 0 "/>
+
+    </link>
+
+
+
+
+    <joint name="arm_lidar" type="fixed">
+        <parent link="lidar_link"/>
+        <child link="arm_base"/>
+
+        <origin xyz="0 0 .01" rpy="0 0 0"/>
+<!-- 
+        <axis xyz="0 0 1"/>
+
+        <limit
+            lower="3.14"
+            upper="-3.14"
+            effort="100"
+            velocity="1.2"/> -->
+    </joint>
+
+
+    <joint name="arm_base_1" type="revolute">
+        <parent link="arm_base"/>
+        <child link="arm_1"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="0.985" upper="0" effort="100" velocity="1.2"/>
+        <origin xyz="0 0 0.005" rpy="0 0 0"/>
+        
+    </joint>
+
+    <joint name="arm_base_2" type="revolute">
+        <parent link="arm_1"/>
+        <child link="arm_2"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="1.214" upper="0" effort="100" velocity="1.2"/>
+        <origin xyz="0 0 0.2 " rpy="0 0 0"/>
+        
+    </joint>
+</robot>
