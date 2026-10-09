@@ -23,10 +23,7 @@ def generate_launch_description():
     # ============================================================
 
     # Custom robot models
-    robot_models_path = os.path.join(
-        get_package_share_path("my_robot_bringup"),
-        "models"
-    )
+
     house_texture_path = os.path.join(
     get_package_share_path("turtlebot3_gazebo"),
     "models",
@@ -85,7 +82,7 @@ def generate_launch_description():
     gz_resource_path = SetEnvironmentVariable(
         name="GZ_SIM_RESOURCE_PATH",
         value=(
-            f"{robot_models_path}:"
+            # f"{robot_models_path}:"
             f"{house_models_path}:"
             f"{house_texture_path}:"
             f"{os.environ.get('GZ_SIM_RESOURCE_PATH', '')}"
@@ -96,7 +93,7 @@ def generate_launch_description():
     ign_resource_path = SetEnvironmentVariable(
         name="IGN_GAZEBO_RESOURCE_PATH",
         value=(
-            f"{robot_models_path}:"
+            # f"{robot_models_path}:"
             f"{house_models_path}:"
             f"{os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')}"
         )

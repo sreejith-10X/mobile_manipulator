@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="house">
+    <static>true</static>
+    <link name="house_link">
+      <!-- Rotate 90 deg around X-axis (Roll) to lay it flat on the ground -->
+      <pose>0 0 0 1.5708 0 0</pose>
+
+      <collision name="house_collision">
+        <geometry>
+          <mesh>
+            <uri>model://house/collision.glb</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <visual name="house_visual">
+        <geometry>
+          <mesh>
+            <uri>model://house/visual.glb</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

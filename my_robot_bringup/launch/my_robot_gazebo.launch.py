@@ -20,18 +20,19 @@ def generate_launch_description():
 
     # ============================================================
     # PATHS
-    # ============================================================
-
-    # Custom robot models
-    robot_models_path = os.path.join(
-        get_package_share_path("my_robot_bringup"),
-        "models"
+    # House world
+    world_path = os.path.join(
+        get_package_share_path("my_robot_description"),
+        "my_house",
+        "worlds",
+        "house.world"
     )
+
+
 
     # House models
     house_models_path = os.path.join(
-        get_package_share_path("turtlebot3_gazebo"),
-        "worlds",
+        get_package_share_path("my_robot_description"),
         "my_house",
         "models"
     )
@@ -58,16 +59,7 @@ def generate_launch_description():
         "gazebo_bridge.yaml"
     )
 
-    # House world
-    world_path = os.path.join(
-        get_package_share_path("turtlebot3_gazebo"),
-        "worlds",
-        "my_house",
-        "worlds",
-        "house.world"
-    )
-
-
+  
     # ============================================================
     # GAZEBO RESOURCE PATH
     # ============================================================
@@ -75,7 +67,6 @@ def generate_launch_description():
     gz_resource_path = SetEnvironmentVariable(
         name="GZ_SIM_RESOURCE_PATH",
         value=(
-            f"{robot_models_path}:"
             f"{house_models_path}:"
             f"{os.environ.get('GZ_SIM_RESOURCE_PATH', '')}"
         )
@@ -85,7 +76,7 @@ def generate_launch_description():
     ign_resource_path = SetEnvironmentVariable(
         name="IGN_GAZEBO_RESOURCE_PATH",
         value=(
-            f"{robot_models_path}:"
+            # f"{robot_models_path}:"
             f"{house_models_path}:"
             f"{os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')}"
         )
@@ -187,7 +178,7 @@ def generate_launch_description():
         ),
         launch_arguments=
             {"use_sim_time":"True",
-             "map": "/home/vermax/maps/my_world.yaml"
+             "map": "/home/vermax/ros2-ws/src/robot_manipulator/my_robot_bringup/maps/my_world.yaml"
             }.items()
 
         

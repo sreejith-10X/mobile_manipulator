@@ -8,6 +8,7 @@ install(
     urdf
     launch
     config
+    my_house
   DESTINATION share/${PROJECT_NAME}
 )
 
