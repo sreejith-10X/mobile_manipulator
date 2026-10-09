@@ -36,7 +36,11 @@ def generate_launch_description():
         "my_house",
         "models"
     )
-    
+    map_path = os.path.join(
+    get_package_share_path("my_robot_bringup"),
+    "maps",
+    "my_world.yaml"
+)
 
     # Robot Xacro
     urdf_path = os.path.join(
@@ -178,7 +182,7 @@ def generate_launch_description():
         ),
         launch_arguments=
             {"use_sim_time":"True",
-             "map": "/home/vermax/ros2-ws/src/robot_manipulator/my_robot_bringup/maps/my_world.yaml"
+            "maps":map_path
             }.items()
 
         
